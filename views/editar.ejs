@@ -16,7 +16,9 @@
     <a href="#" onclick="history.go(-1)">Volver Atrás</a>
   </div>
   <h1>Editar Canción</h1>
-  <form action="/ruta-de-edicion-de-cancion" method="POST">
+  <form action="#/" method="POST">
+    <input type="hidden" name="id" value="<%= cancion.id %>">
+
     <label for="titulo">Título:</label>
     <input type="text" id="titulo" name="titulo" value="<%= cancion.titulo %>" required>
 

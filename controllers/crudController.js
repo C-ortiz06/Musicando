@@ -1,5 +1,6 @@
 
 const { canciones, artistas, albumes, generos } = require("../database/models");
+const cancionesModel = require('../database/models/canciones');
 
 // Muestra la lista de todas las canciones
 async function obtenerCanciones(req, res) {
@@ -88,7 +89,7 @@ async function crearCancion(req, res) {
 
 async function editCancion(req, res) {
   try {
-    const cancionId = req.params.id; 
+    const cancionId = req.params.id;
 
     const cancion = await canciones.findByPk(cancionId, {
       include: [{ model: artistas }],
@@ -101,12 +102,61 @@ async function editCancion(req, res) {
     const generosList = await generos.findAll();
     const artistasList = await artistas.findAll();
     const albumesList = await albumes.findAll();
-    res.render('editar', { title: 'Crear Nueva Canción', cancion,generos: generosList, artistas: artistasList, albumes: albumesList });
+    res.render('editar', { title: 'Crear Nueva Canción', cancion, generos: generosList, artistas: artistasList, albumes: albumesList });
   } catch (error) {
     console.error(error);
     res.status(500).json({ status: 'error', message: 'Error al cargar la canción para editar' });
   }
 }
+
+async function actCancion(req, res) {
+  console.log(req.body); // Verifica qué valores se están recibiendo
+
+  const newValues = {
+    id: req.body.id,
+    titulo: req.body.titulo,
+    duracion: req.body.duracion,
+    artista_id: req.body.artista,
+    album_id: req.body.album,
+    genero_id: req.body.genero,
+  };
+
+
+  try {
+    await canciones.update(newValues, {
+      where: {
+        id: req.body.id
+      }
+    });
+
+    res.redirect('/');
+  } catch (error) {
+    res.send('No se pudo actualizar!');
+    console.log(error);
+  }
+}
+async function deleteCancion(req, res) {
+  try {
+    const cancionId = req.params.id;
+
+    // Busca la canción por su ID
+    const cancion = await canciones.findByPk(cancionId);
+
+    if (!cancion) {
+      return res.status(404).json({ message: 'Canción no encontrada' });
+    }
+
+    // Elimina la canción
+    await cancion.destroy();
+
+    // Redirige o responde de acuerdo a tus necesidades
+    res.redirect('/'); // Por ejemplo, redirige a la página principal
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ status: 'error', message: 'Error al eliminar la canción' });
+  }
+}
+
 
 
 
@@ -114,5 +164,7 @@ module.exports = {
   obtenerCanciones,
   crearCancion,
   getCrear,
-  editCancion
+  editCancion,
+  actCancion,
+  deleteCancion
 };
