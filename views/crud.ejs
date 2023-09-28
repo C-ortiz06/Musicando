@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Lista de Canciones</title>
+</head>
+
+<body>
+  <h1>Lista de Canciones</h1>
+  <div class="crear-cancion">
+    <button class="crear-cancion-button"><i class="far fa-plus-square"></i> Crear Nueva Canción</button>
+  </div>
+  <ul class="canciones-lista">
+    <% for (let cancion of canciones) { %>
+      <li>
+        <div class="cancion-info">
+          <h2>
+            <a href="/detalle/<%= cancion.id %>"><%= cancion.titulo %></a>
+
+          </h2>
+          <p>Artista: <%= cancion.artista.nombre %>
+          </p>
+          <p>Álbum: <%= cancion.albume ? cancion.albume.nombre : 'Sin álbum' %>
+          </p>
+          <p>Género: <%= cancion.genero ? cancion.genero.name : 'Sin género' %>
+          </p>
+        </div>
+        <div class="acciones">
+          <button><a href="/editar/<%= cancion.id %>"><i class="far fa-edit"></i> Editar</a></button>
+          <form action="/canciones/<%= cancion.id %>?_method=DELETE" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Eliminar</button>
+          </form>
+
+
+          </ div>
+      </li>
+      <% } %>
+  </ul>
+</body>
+<script src="/script/script.js"></script>
+
+</html>

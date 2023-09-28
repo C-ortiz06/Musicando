@@ -1,0 +1,119 @@
+/* Estilos generales */
+body {
+  background-color: #1a1a1a;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+}
+h1:hover {
+  color: #007bff;
+}
+
+/* Estilos para la lista de canciones */
+.canciones-lista {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.canciones-lista li {
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid #333;
+  background-color: #333;
+  flex: 1;
+  min-width: calc(25% - 40px);
+  box-sizing: border-box;
+  border-radius: 15px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+  transition: transform 0.2s;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  text-align: center; 
+}
+
+.canciones-lista li:hover {
+  transform: scale(1.03);
+}
+
+.cancion-info {
+  text-align: center;
+}
+
+.cancion-info h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.cancion-info p {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.acciones {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.acciones button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.crear-cancion button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .canciones-lista li {
+    min-width: calc(33.33% - 40px);
+  }
+}
+
+@media (max-width: 480px) {
+  .canciones-lista li {
+    min-width: 100%;
+  }
+}
+
+.volver {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.volver a {
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.volver a:hover {
+  background-color: #0056b3;
+}

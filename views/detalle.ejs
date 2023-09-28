@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/detalle.css">
+    <title>Detalle de la Canción</title>
+</head>
+<body>
+    <div class="volver">
+        <a href="#" onclick="history.go(-1)">Volver Atrás</a>
+      </div>
+<br><br><br><br><br><br>
+      <div class="cuadro">
+        <h1>Detalle de la Canción</h1>
+
+        <ul>
+            <li><strong>ID:</strong> <%= cancion.id %></li>
+            <li><strong>Título:</strong> <%= cancion.titulo %></li>
+            <li><strong>Duración:</strong> <%= cancion.duracion %> segundos</li>
+            <li><strong>Género:</strong> <%= cancion.genero_id %></li>
+            <li><strong>Álbum:</strong> <%= cancion.album_id %></li>
+            <li><strong>Artista:</strong> <%= cancion.artista_id %></li>
+        </ul>
+
+    </div>
+   
+    
+</body>
+</html>
