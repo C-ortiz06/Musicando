@@ -9,6 +9,8 @@ const crudController = require('../controllers/crudController');
 // Define una ruta para mostrar la vista "crud.ejs"
 router.get('/', crudController.obtenerCanciones);
 
+router.get('/detalle/:id', crudController.mostrarDetalleCancion);
+
 // Ruta para mostrar el formulario de creación
 router.get('/crear', crudController.getCrear);
 

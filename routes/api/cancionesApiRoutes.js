@@ -3,11 +3,11 @@ const apiControllers = require("../../controllers/api/cancionesApiController");
 
 const router = express.Router();
 
-//@GET - /api/user
-router.get("/", apiControllers.getAll);
+//@GET - /api/canciones
+router.get("/", apiControllers.toltalCanciones);
 
-//@GET - /api/user/:id
-/* router.get("/:id", apiControllers.getUser); */
+//@GET - /api/canciones/:id
+ router.get("/:id", apiControllers.cancionesId); 
 
 
 module.exports = router;

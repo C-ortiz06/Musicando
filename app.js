@@ -16,6 +16,7 @@ app.use(methodOverride('_method'));
 
 /* --- API Routers --- */
 const cancionesApiRoutes = require("./routes/api/cancionesApiRoutes")
+const generoRoutes = require('./routes/api/generoApiRoutes');
 
 
 // Rutas
@@ -24,8 +25,10 @@ const crudRoutes = require('./routes/index.js');
 // Usar las rutas de CRUD
 app.use('/', crudRoutes); 
 
+
 //REST API ENDPOINTS
 app.use('/api/canciones', cancionesApiRoutes);
+app.use('/api/generos', generoRoutes);
 
 // Inicio del servidor
 app.listen(PORT, () => {

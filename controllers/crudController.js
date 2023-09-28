@@ -19,6 +19,27 @@ async function obtenerCanciones(req, res) {
   }
 }
 
+// Función para mostrar el detalle de una canción por su ID
+async function mostrarDetalleCancion(req, res) {
+  try {
+    const cancionId = req.params.id;
+
+    // Busca la canción por su ID en la base de datos
+    const cancion = await canciones.findByPk(cancionId);
+
+    if (!cancion) {
+      return res.status(404).json({ message: 'Canción no encontrada' });
+    }
+
+    // Renderiza la vista de detalleCancion.ejs y pasa la información de la canción como contexto
+    res.render('detalle', { cancion });
+  } catch (error) {
+    console.error('Error al mostrar el detalle de la canción:', error);
+    res.status(500).json({ status: 'error', message: 'Error al mostrar el detalle de la canción' });
+  }
+}
+
+
 // Renderiza la vista de crear
 async function getCrear(req, res) {
   try {
@@ -136,29 +157,18 @@ async function actCancion(req, res) {
   }
 }
 async function deleteCancion(req, res) {
-  try {
-    const cancionId = req.params.id;
+  const { id } = req.params;
 
-    // Busca la canción por su ID
-    const cancion = await canciones.findByPk(cancionId);
-
-    if (!cancion) {
-      return res.status(404).json({ message: 'Canción no encontrada' });
-    }
-
-    // Elimina la canción
-    await cancion.destroy();
-
-    // Redirige o responde de acuerdo a tus necesidades
-    res.redirect('/'); // Por ejemplo, redirige a la página principal
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ status: 'error', message: 'Error al eliminar la canción' });
-  }
+  const deleteRowCount = await canciones.destroy({
+      where: {
+          id:id
+      }
+  })
+  res.json({
+      message: 'Cancion eliminada correctamente',
+      count: deleteRowCount
+  })
 }
-
-
-
 
 module.exports = {
   obtenerCanciones,
@@ -166,5 +176,6 @@ module.exports = {
   getCrear,
   editCancion,
   actCancion,
-  deleteCancion
+  deleteCancion,
+  mostrarDetalleCancion
 };
